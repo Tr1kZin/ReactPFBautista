@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.heaader{
+    background-color: pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+}
+.nav-menu{
+    display: flex;
+    list-style-type: none;
+    gap: 3rem;
+}
+.nav-link{
+    text-decoration: none;
+    color: black;
+}
+.list-conteiner{
+    min-height: 30vh;
+    display: grid;
+    place-items: center;
+    
+    
+}
+
+            
