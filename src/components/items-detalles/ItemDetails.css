@@ -1,0 +1,30 @@
+.item-list-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.productos-grilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    
+}
+
+.producto {
+    background-color: yellow;
+    border-radius: .5rem;
+    padding: 1rem;
+    border: solid black 1px;
+}
+.products-container {
+    min-height: 30vh;
+    display: grid;
+    place-items: center;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+}
