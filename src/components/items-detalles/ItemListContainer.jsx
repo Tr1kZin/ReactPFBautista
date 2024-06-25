@@ -1,38 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import data from "../../data/productos.json";
-import categories from "../../data/categorias.json";
+import { useEffect, useState } from 'react';
 import { ItemList } from './ItemList';
 import { useParams } from 'react-router-dom';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
- const ItemListContainer = () => {
+export const ItemListContainer = ({greeting}) => {
 
-  let { categoryId } = useParams();
-  let [productos, setProductos] = useState([]);
+    let { categoryId } = useParams();
+    let [productos, setProductos] = useState([]);
+    let [titulo, setTitulo] = useState("Productos");
 
-  let [titulo, setTitulo] = useState("Productos");
-  
-  const pedirProductos = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(data);
-      }, 1000);
-    })
-  }
+    useEffect(() => {
+        const productosRef = collection(db, "productos");
+        const q = categoryId ? query(productosRef, where("categoria.id", "==", categoryId)) : productosRef;
 
-  useEffect(() => {
-    
-    pedirProductos()
-      .then((res) => {
-        if (!categoryId) {
-          setTitulo("Productos");
-          setProductos(res);
+        const categoriasRef = collection(db, "categorias");
+        let catQuery = categoryId && query(categoriasRef, where("id", "==", categoryId));
+
+        getDocs(q)
+            .then((res) => {
+                setProductos(
+                    res.docs.map((doc) => {
+                        return { ...doc.data(), id: doc.id }
+                    })
+                )
+            });
+
+        if (catQuery) {
+            getDocs(catQuery)
+                .then((res) => {
+                    if (res.docs.length > 0) {
+                        setTitulo(res.docs[0].data().nombre);
+                    } else {
+                        setTitulo("Cargando...");
+                    }
+                });
         } else {
-          setTitulo(categories.find((cat) => cat.id === categoryId).nombre);
-          setProductos(res.filter((prod) => prod.categoria.id === categoryId));
+            setTitulo("Las mejores gorras!");
         }
-      })
-      
-  }, [categoryId]);
+    }, [categoryId]);
   
 
   return (
@@ -42,4 +48,3 @@ import { useParams } from 'react-router-dom';
     </div>
   )
 }
-export default ItemListContainer

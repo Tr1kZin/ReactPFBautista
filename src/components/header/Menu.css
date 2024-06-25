@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 .heaader{
     background: linear-gradient(290deg, #921b1b, #e69e5b);
@@ -26,17 +27,16 @@ color: white;
     text-decoration: none;
     gap: 3rem;
 }
-
-.links{
-    color: black;
-    list-style: none;
+ .nav-link{
+    color: white;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-.links:hover{
-    color: yellow;
-    
-}
+    font-weight: 700;
+ }
+ .nav-link:hover{
+    color: black;
+ }
+
+
 .list-conteiner{
     min-height: 30vh;
     display: grid;

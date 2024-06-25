@@ -1,7 +1,22 @@
-import categories from '../../data/categorias.json'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import {  NavLink } from 'react-router-dom';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import "./Menu.css"
 
 export const NavBar = () => {
+  let [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+      const categoriasRef = collection(db, "categorias");
+      getDocs(categoriasRef)
+          .then((res) => {
+              setCategories(res.docs.map((doc) => {
+                  return { id: doc.id, ...doc.data() }
+              }));
+          })
+  }, [])
+
   return (
     <nav className="nav">
         <ul className="nav-menu">
@@ -23,5 +38,4 @@ export const NavBar = () => {
     </nav>
   )
 }
-
 
