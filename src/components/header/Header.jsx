@@ -8,7 +8,7 @@ export const Header = (props) => {
   return (
     
     <div className='heaader'>
-      <img className='imglogo' src="./      img/pngwing.com.png"/>
+      <img className='imglogo' src="/img/pngwing.com.png"/>
      <Link to="/"> <h1>CoderCaps</h1></Link>
       
       
