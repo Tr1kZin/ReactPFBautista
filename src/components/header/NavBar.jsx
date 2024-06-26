@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {  NavLink } from 'react-router-dom';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { db } from "../firebase/config";
 import "./Menu.css"
 
 export const NavBar = () => {

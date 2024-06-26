@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ItemList } from './ItemList';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { db } from "../firebase/config";
 
 export const ItemListContainer = ({greeting}) => {
 
@@ -30,9 +30,9 @@ export const ItemListContainer = ({greeting}) => {
             getDocs(catQuery)
                 .then((res) => {
                     if (res.docs.length > 0) {
-                        setTitulo(res.docs[0].data().nombre);
+                        setTitulo(res.docs[1].data().nombre);
                     } else {
-                        setTitulo("Cargando...");
+                        setTitulo("Gorritas baratitas");
                     }
                 });
         } else {
